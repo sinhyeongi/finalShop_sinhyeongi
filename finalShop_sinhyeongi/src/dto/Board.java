@@ -3,23 +3,24 @@ package dto;
 import java.time.LocalDate;
 
 public class Board {
-	private static int num;
+	private static int num ;
 	private int boradNum;
 	private String title;
 	private String id;
 	private String date;
 	private String contents;
 	private int hits;
-	
-	public Board(int boradNum, String title, String id, String contents) {
-		this.boradNum = num++;
+	public Board() {
+	}
+	public Board( String title, String contents,String id) {
+		this.boradNum = ++num;
 		this.title = title;
 		this.id = id;
 		this.date = LocalDate.now().toString();
 		this.contents = contents;
 		this.hits = 1;
 	}
-	public Board(int boradNum, String title, String id,String date, String contents,int hits) {
+	public Board(int boradNum, String title, String id, String contents,String date,int hits) {
 		this.boradNum = boradNum;
 		this.title = title;
 		this.id = id;
@@ -84,6 +85,13 @@ public class Board {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
-	
+	@Override
+	public String toString() {
+		return boradNum + "/" + title + "/" + id + "/" + date + "/"
+				+ contents + "/" + hits;
+	}
+	public String toBoard() {
+		return"( "+this.boradNum+") [ 제목 : "+this.title+"\t\t 작성자 : "+this.id +"날짜 : "+date+"\t\t 조회수 : "+hits+"]";
+	}
 	
 }
