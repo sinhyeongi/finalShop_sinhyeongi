@@ -63,7 +63,6 @@ public class BoardDAO {
 	}
 
 	public void PrintBoard(int idx) {
-		
 		for(int i = 0 ; i < board.size(); i++) {
 			if(board.get(i).getBoradNum() == idx) {
 				System.out.println(board.get(i).toBoard());
@@ -71,9 +70,10 @@ public class BoardDAO {
 				System.out.println(board.get(i).getContents());
 				System.out.println();
 				board.get(i).setHits(board.get(i).getHits() +1);
-				break;
+				return;
 			}
 		}
+		System.out.println("찾는 번호의 게시글이 없습니다.");
 	}
 
 	public void PrintBoard(String id) {
