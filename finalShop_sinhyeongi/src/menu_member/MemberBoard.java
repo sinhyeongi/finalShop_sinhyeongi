@@ -36,7 +36,7 @@ public class MemberBoard  implements MenuCommand {
 				System.out.println("[2] 이후");
 				System.out.println("[3] 게시글 보기");
 				System.out.println("[0] 종료");
-				sel = Util.getValue("► 메뉴 입력 [0 - 4] ", 0, 3);
+				sel = Util.getValue("► 메뉴 입력 [0 - 3] ", 0, 3);
 				if(sel == 0) {
 					break;
 				}else if( sel == 1) {
@@ -48,7 +48,7 @@ public class MemberBoard  implements MenuCommand {
 						System.out.println("마지막 페이지 입니다.");
 					}
 				}else if( sel == 3) {
-					sel = Util.getValue("게시글 번호 입력 ["+(board.getStart()+1 )+ " - "+( board.getEnd()+1)+"]", board.getStart()+1, board.getEnd()+1);
+					sel = Util.getValue("게시글 번호 입력 ["+(board.getStart() )+ " - "+board.getEnd()+"]", board.getStart(), board.getEnd());
 					board.PrintBoard(sel);
 					break;
 				}

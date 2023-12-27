@@ -52,19 +52,28 @@ public class BoardDAO {
 	}
 
 	public int getStart() {
-		return start;
+		return board.get(start).getBoradNum();
 	}
 
 	public int getEnd() {
-		return Math.min(end, board.size() - 1);
+		if( end > board.size()) {
+			return board.get(board.size()-1).getBoradNum();
+		}
+		return board.get(end).getBoradNum();
 	}
 
 	public void PrintBoard(int idx) {
-		System.out.println(board.get(idx - 1).toBoard());
-		System.out.println("------------------------");
-		System.out.println(board.get(idx - 1).getContents());
-		System.out.println();
-		board.get(idx - 1).setHits(board.get(idx - 1).getHits() + 1);
+		
+		for(int i = 0 ; i < board.size(); i++) {
+			if(board.get(i).getBoradNum() == idx) {
+				System.out.println(board.get(i).toBoard());
+				System.out.println("------------------------");
+				System.out.println(board.get(i).getContents());
+				System.out.println();
+				board.get(i).setHits(board.get(i).getHits() +1);
+				break;
+			}
+		}
 	}
 
 	public void PrintBoard(String id) {
@@ -106,7 +115,7 @@ public class BoardDAO {
 
 	public boolean DeleteUserBoard(String id, int idx) {
 		for (int i = 0; i < board.size(); i++) {
-			if (board.get(i).getBoradNum() == idx && id.equals(board.get(i).getId()) || id.equals("admin")) {
+			if (board.get(i).getBoradNum() == idx && (id.equals(board.get(i).getId()) || id.equals("admin"))) {
 				System.out.println("게시글 삭제 완료");
 				if (board.size() == 1) {
 					board.clear();
