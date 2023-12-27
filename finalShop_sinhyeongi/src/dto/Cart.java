@@ -44,11 +44,11 @@ public class Cart {
 		this.itemCnt = itemCnt;
 		num++;
 	}
-	public Cart( String id, int itemNum) {
-		this.cartNum = num++;
+	public Cart( String id, int itemNum,int itemCnt) {
+		this.cartNum = ++num;
 		this.id = id;
 		this.itemNum = itemNum;
-		this.itemCnt = 1;
+		this.itemCnt = itemCnt;
 	}
 	
 }

@@ -28,16 +28,22 @@ public class _MemberMain  implements MenuCommand {
 		if(sel == 0) {
 			cont.setNext(null);
 		}else if( sel == 1) {
-			
+			cont.setNext("MemberShopping");
 		}else if(sel == 2) {
-			
+			cont.setNext("MemberCart");
 		}
 		else if(sel == 3) {
 			cont.setNext("MemberBoard");
 		}
-		else if(sel == 4) {}
-		else if(sel == 5) {}
-		else if(sel == 6) {}
+		else if(sel == 4) {
+			cont.setNext("MemberInfo");
+		}
+		else if(sel == 5) {
+			cont.DeleteUser();
+		}
+		else if(sel == 6) {
+			cont.DeleteUser();
+		}
 		return false;
 	}
 	

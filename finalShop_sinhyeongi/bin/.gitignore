@@ -1,9 +1,5 @@
-/_mall/
 /controller/
-/dao/
-/dto/
-/files/
-/menu_admin/
 /menu_mall/
+/dao/
 /menu_member/
-/util/
+/dto/

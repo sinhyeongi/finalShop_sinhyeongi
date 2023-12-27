@@ -108,4 +108,15 @@ public class BoardDAO {
 			board.add(new Board(Integer.parseInt(t[0]),t[1],t[2],t[3],t[4],Integer.parseInt(t[5])));
 		}
 	}
+	public void DeleteUser(String id) {
+		for(int i = 0 ; i < board.size(); i++) {
+			if(board.get(i).getId().equals(id)) {
+				if(board.size() == 1) {
+					board.clear();
+					break;
+				}
+				board.remove(i);
+			}
+		}
+	}
 }

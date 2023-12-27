@@ -16,8 +16,10 @@ public class Util {
 			System.out.print(s+"입력 : ");
 			try {
 				int inp = scanner.nextInt();
-				if(inp < min || inp > max)
+				if(inp < min || inp > max) {
+					System.out.println(min + " ~ "+max+" 값 까지 입력해주세요");
 					continue;
+				}
 				return inp; 
 			}catch(InputMismatchException e) {
 				scanner.nextLine();

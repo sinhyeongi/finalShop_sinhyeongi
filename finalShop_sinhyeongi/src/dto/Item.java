@@ -1,11 +1,30 @@
 package dto;
 
+import java.util.Objects;
+
 public class Item {
 	private static int num;
 	private int itemNum;
 	private String categoryName;
 	private String itemName;
 	private int price;
+	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(categoryName);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		return Objects.equals(categoryName, other.categoryName);
+	}
 	public static int getNum() {
 		return num;
 	}
@@ -41,6 +60,10 @@ public class Item {
 		this.categoryName = categoryName;
 		this.itemName = itemName;
 		this.price = price;
+	}
+	@Override
+	public String toString() {
+		return itemName+"\t"+price;
 	}
 	
 	

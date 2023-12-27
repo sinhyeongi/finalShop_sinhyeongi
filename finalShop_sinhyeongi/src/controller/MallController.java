@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import _mall.MenuCommand;
+import dao.BoardDAO;
+import dao.CartDAO;
 import dao.FileDAO;
+import dao.ItemDAO;
+import dao.MemberDAO;
 import menu_admin.AdminBoard;
 import menu_admin.AdminItem;
 import menu_admin.AdminMember;
@@ -21,8 +25,15 @@ import menu_member._MemberMain;
 
 public class MallController {
 	private static  MallController instance = new MallController();
-	
+	private BoardDAO board;
+	private CartDAO cart;
+	private ItemDAO item;
+	private MemberDAO member;
 	private MallController() {
+		board = BoardDAO.getInstance();
+		cart = CartDAO.getInstance();
+		item = ItemDAO.getInstance();
+		member = MemberDAO.getInstance();
 	}
 	
 	
@@ -51,7 +62,15 @@ public class MallController {
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
-
+	public void DeleteUser() {
+		System.out.println(member.getMemberName(loginId)+"탈퇴 완료");
+		member.DeleteUser(loginId);
+		cart.DeleteUser(loginId);
+		board.DeleteUser(loginId);
+		loginId = null;
+		this.next = "MallMain";
+		
+	}
 	public void init() {
 		FileDAO.getInstance().loadAllFiles();
 		mapCont = new HashMap<>();

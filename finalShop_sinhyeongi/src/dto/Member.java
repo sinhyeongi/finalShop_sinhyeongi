@@ -51,6 +51,8 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	
+	public String Info() {
+		return "[%6d] [%10s] [%12s] [%12s]".formatted(memberNum,id,pw,memberName);
+	}
 	
 }
