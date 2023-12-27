@@ -47,6 +47,7 @@ public class AdminItem implements MenuCommand  {
 			}
 			int No = Util.getValue("► 삭제할 아이템 번호 입력 [ "+item.GetFistItemNum()+" -"+item.GetLastItemNum()+"]", item.GetFistItemNum(), item.GetLastItemNum());
 			cont.DeleteItem(No);
+			cont.Save();
 		}
 		else if( sel == 3) {
 			item.PrintAdminCartData(cart.PrintCart());
