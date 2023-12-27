@@ -2,7 +2,7 @@ package dto;
 
 import java.util.Objects;
 
-public class Item {
+public class Item{
 	private static int num;
 	private int itemNum;
 	private String categoryName;
@@ -14,6 +14,7 @@ public class Item {
 	public int hashCode() {
 		return Objects.hash(categoryName);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -25,6 +26,7 @@ public class Item {
 		Item other = (Item) obj;
 		return Objects.equals(categoryName, other.categoryName);
 	}
+	
 	public static int getNum() {
 		return num;
 	}
@@ -60,12 +62,24 @@ public class Item {
 		this.categoryName = categoryName;
 		this.itemName = itemName;
 		this.price = price;
+		num++;
+	}
+	public Item(String categoryName, String itemName, int price) {
+		this.itemNum = ++num;
+		this.categoryName = categoryName;
+		this.itemName = itemName;
+		this.price = price;
 	}
 	@Override
 	public String toString() {
 		return itemName+"\t"+price;
 	}
-	
+	public String Save() {
+		return "%d/%s/%s/%d\n".formatted(itemNum,categoryName,itemName,price);
+	}
+	public void Info() {
+		System.out.println("[%3d] [%5s] [%5s] [%12d원]".formatted(itemNum,categoryName,itemName,price));
+	}
 	
 	
 }

@@ -11,30 +11,32 @@ public class BoardDAO {
 	private int start;
 	private int end;
 	private int page;
+
 	public BoardDAO() {
 		board = new ArrayList<Board>();
 		start = 0;
 		end = 4;
 		page = 1;
 	}
-	
+
 	public static BoardDAO getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new BoardDAO();
 		return instance;
 	}
+
 	public boolean NextPage() {
-		if(page == getMaxpage()) {
+		if (page == getMaxpage()) {
 			return true;
 		}
 		start = ++end;
-		end  +=4 ;
+		end += 4;
 		page++;
 		return false;
 	}
-	
+
 	public boolean beforePage() {
-		if(page == 1) {
+		if (page == 1) {
 			return true;
 		}
 		end = --start;
@@ -42,76 +44,108 @@ public class BoardDAO {
 		page--;
 		return false;
 	}
+
 	public void PrintBoard() {
-		for(int i = start; i <= Math.min(end, board.size() - 1); i++) {
+		for (int i = start; i <= Math.min(end, board.size() - 1); i++) {
 			System.out.println(board.get(i).toBoard());
 		}
 	}
+
 	public int getStart() {
 		return start;
 	}
+
 	public int getEnd() {
-		return Math.min(end, board.size()-1);
+		return Math.min(end, board.size() - 1);
 	}
+
 	public void PrintBoard(int idx) {
-		System.out.println(board.get(idx-1).toBoard());
+		System.out.println(board.get(idx - 1).toBoard());
 		System.out.println("------------------------");
-		System.out.println(board.get(idx-1).getContents());
+		System.out.println(board.get(idx - 1).getContents());
 		System.out.println();
-		board.get(idx-1).setHits(board.get(idx-1).getHits() + 1);
+		board.get(idx - 1).setHits(board.get(idx - 1).getHits() + 1);
 	}
+
 	public void PrintBoard(String id) {
-		for(int i = 0; i < board.size(); i++) {
-			if(id.equals(board.get(i).getId()))
+		for (int i = 0; i < board.size(); i++) {
+			if (id.equals(board.get(i).getId()))
 				System.out.println(board.get(i).toBoard());
 		}
 	}
-	public int getBoardSize() {
-		return board.size();
+	public int getBoardStartdNum() {
+		if(board.size() == 0)
+			return 0;
+		return board.get(0).getBoradNum();
 	}
+	public int getBoardendNum() {
+		if(board.size() == 0)
+			return 0;
+		return board.get(board.size()-1).getBoradNum();
+	}
+
 	public int getBoardSize(String id) {
 		int count = 0;
-		for(int i = 0 ; i < board.size(); i++) {
-			if(id.equals(board.get(i).getId())) {
+		for (int i = 0; i < board.size(); i++) {
+			if (id.equals(board.get(i).getId())) {
 				count++;
 			}
 		}
 		return count;
 	}
-	public void NewBoard(String title, String content,String id) {
-		board.add(new Board( title, content,id));
+
+	public void NewBoard(String title, String content, String id) {
+		board.add(new Board(title, content, id));
 	}
+
 	public int getMaxpage() {
-		if(board.size() <=4)
+		if (board.size() <= 4)
 			return 1;
-		return (board.size()-1) / 4 + ((board.size()-1) % 4 == 0? 0 : 1);
+		return (board.size() - 1) / 4 + ((board.size() - 1) % 4 == 0 ? 0 : 1);
 	}
-	public boolean DeleteUserBoard(String id, int i) {
-		if(board.get(i-1).getId().equals(id)) {
-			System.out.println("게시글 삭제 완료");
-			if(board.size() == 1) {
-				board.clear();
+
+	public boolean DeleteUserBoard(String id, int idx) {
+		for (int i = 0; i < board.size(); i++) {
+			if (board.get(i).getBoradNum() == idx && id.equals(board.get(i).getId()) || id.equals("admin")) {
+				System.out.println("게시글 삭제 완료");
+				if (board.size() == 1) {
+					board.clear();
+					return false;
+				}
+				board.remove(i);
 				return false;
 			}
-			board.remove(i);
-			return false;
 		}
 		return true;
 	}
+
 	public void LoadData(String data) {
-		if(data == null || data.length() < 1)return;
-		if(board.size() != 0)
+		if (data == null || data.length() < 1)
+			return;
+		if (board.size() != 0)
 			board.clear();
 		String[] data2 = data.split("\n");
-		for(int i = 0 ; i < data2.length ;i++) {
+		for (int i = 0; i < data2.length; i++) {
 			String[] t = data2[i].split("/");
-			board.add(new Board(Integer.parseInt(t[0]),t[1],t[2],t[3],t[4],Integer.parseInt(t[5])));
+			board.add(new Board(Integer.parseInt(t[0]), t[1], t[2], t[3], t[4], Integer.parseInt(t[5])));
 		}
 	}
+
+	public String SaveData() {
+		String data = "";
+
+		for (int i = 0; i < board.size(); i++) {
+			data += board.get(i).Save();
+		}
+		if (data.length() > 1)
+			data = data.substring(0, data.length() - 1);
+		return data;
+	}
+
 	public void DeleteUser(String id) {
-		for(int i = 0 ; i < board.size(); i++) {
-			if(board.get(i).getId().equals(id)) {
-				if(board.size() == 1) {
+		for (int i = 0; i < board.size(); i++) {
+			if (board.get(i).getId().equals(id)) {
+				if (board.size() == 1) {
 					board.clear();
 					break;
 				}

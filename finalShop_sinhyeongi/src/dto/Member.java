@@ -54,5 +54,8 @@ public class Member {
 	public String Info() {
 		return "[%6d] [%10s] [%12s] [%12s]".formatted(memberNum,id,pw,memberName);
 	}
+	public String Save() {
+		return "%s/%s/%s/%s\n".formatted(memberName,id,pw,memberName);
+	}
 	
 }

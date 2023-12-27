@@ -29,11 +29,13 @@ public class MallController {
 	private CartDAO cart;
 	private ItemDAO item;
 	private MemberDAO member;
+	private FileDAO file;
 	private MallController() {
 		board = BoardDAO.getInstance();
 		cart = CartDAO.getInstance();
 		item = ItemDAO.getInstance();
 		member = MemberDAO.getInstance();
+		file = FileDAO.getInstance();
 	}
 	
 	
@@ -69,7 +71,20 @@ public class MallController {
 		board.DeleteUser(loginId);
 		loginId = null;
 		this.next = "MallMain";
-		
+	}
+	public void DeleteUser(String id) {
+		System.out.println(member.getMemberName(id)+"탈퇴 완료");
+		member.DeleteUser(id);
+		cart.DeleteUser(id);
+		board.DeleteUser(id);
+	}
+	public void Save() {
+		file.SaveAllFiles(member.SaveData(),item.SaveData(),cart.SaveData(),board.SaveData());
+		System.out.println("파일 저장 완료");
+	}
+	public void DeleteItem(int No) {
+		item.DeleteItem(No);
+		cart.DeleteItem(No);
 	}
 	public void init() {
 		FileDAO.getInstance().loadAllFiles();

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import dto.Cart;
@@ -47,6 +48,15 @@ public class CartDAO {
 		}
 
 	}
+	public String SaveData() {
+		String data="";
+		for(int i = 0 ; i < cart.size(); i++) {
+			data += cart.get(i).Save();
+		}
+		if(data.length() > 1)
+			data = data.substring(0,data.length()-1);
+		return data;
+	}
 	public String PrintCart(String id) {
 		String data ="";
 		for(int i = 0 ; i < cart.size(); i++) {
@@ -58,11 +68,33 @@ public class CartDAO {
 			data = data.substring(0,data.length() -1);
 		return data;
 	}
+	public String PrintCart() {
+		String data ="";
+		List<Cart> copy = cart;
+		copy.sort(Comparator.comparing(Cart::getItemCnt).reversed());
+		for(int i = 0 ; i < copy.size(); i++) {
+				data += copy.get(i).getItemNum()+"/"+copy.get(i).getItemCnt()+"\n";
+		}
+		if(data.length() > 1)
+			data = data.substring(0,data.length() -1);
+		return data;
+	}
 	public void DeleteUser(String id) {
 		for(int i = 0 ; i < cart.size(); i++) {
 			if(cart.get(i).getId().equals(id)) {
 				if(cart.size() == 1) {
 					cart.clear();
+				}
+				cart.remove(i);
+			}
+		}
+	}
+	public void DeleteItem(int No) {
+		for(int i = 0 ; i < cart.size(); i++) {
+			if( No == cart.get(i).getItemNum()) {
+				if(cart.size() == 1) {
+					cart.clear();
+					break;
 				}
 				cart.remove(i);
 			}

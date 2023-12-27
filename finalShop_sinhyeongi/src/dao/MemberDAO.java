@@ -21,7 +21,20 @@ public class MemberDAO {
 			}
 		}
 	}
-
+	public String SaveData() {
+		String data ="";
+		for(int i = 0 ; i < list.size(); i++) {
+			data += list.get(i).Save();
+		}
+		if(data.length() > 1)
+			data = data.substring(0,data.length() -1);
+		return data;
+	}
+	public void PrintInfo() {
+		for (Member m : list) {
+			System.out.println(m.Info());
+		}
+	}
 	public static MemberDAO getInstance() {
 		if (instance == null)
 			instance = new MemberDAO();

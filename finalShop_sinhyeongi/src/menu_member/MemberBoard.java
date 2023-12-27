@@ -26,7 +26,7 @@ public class MemberBoard  implements MenuCommand {
 		if(sel == 0) {
 			cont.setNext(null);
 		}else if(sel == 1) {
-			if(board.getBoardSize() == 0) {
+			if(board.getBoardendNum() == 0) {
 				System.out.println("게시글이 없습니다!");
 				return false;
 			}
@@ -70,7 +70,7 @@ public class MemberBoard  implements MenuCommand {
 			System.out.println("[0]돌아가기");
 			 sel = Util.getValue("► 메뉴 입력 [0 - 1] ", 0, 1);
 			 if(sel == 1) {
-				 sel = Util.getValue("► 삭제할 게시글 번호 입력  [1 - "+(board.getBoardSize() -1) +"] ", 1, board.getBoardSize() -1 );
+				 sel = Util.getValue("► 삭제할 게시글 번호 입력  ["+board.getBoardStartdNum()+" - "+board.getBoardendNum() +"] ", board.getBoardStartdNum(), board.getBoardendNum() );
 				 if(board.DeleteUserBoard(cont.getLoginId(), sel)) {
 					 System.out.println("본인 게시글만 삭제하실 수 있습니다.");
 				 }

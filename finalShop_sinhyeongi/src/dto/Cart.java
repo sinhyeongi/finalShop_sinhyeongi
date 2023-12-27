@@ -50,5 +50,7 @@ public class Cart {
 		this.itemNum = itemNum;
 		this.itemCnt = itemCnt;
 	}
-	
+	public String Save() {
+		return "%d/%s/%d/%d\n".formatted(cartNum,id,itemNum,itemCnt);
+	}
 }

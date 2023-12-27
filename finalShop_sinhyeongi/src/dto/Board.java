@@ -93,5 +93,8 @@ public class Board {
 	public String toBoard() {
 		return"( "+this.boradNum+") [ 제목 : "+this.title+"\t\t 작성자 : "+this.id +"날짜 : "+date+"\t\t 조회수 : "+hits+"]";
 	}
+	public String Save() {
+		return "%d/%s/%s/%s/%s/%d\n".formatted(boradNum,title,contents,id,date,hits);
+	}
 	
 }

@@ -1,7 +1,10 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import dto.Item;
 import dto.Member;
@@ -20,6 +23,13 @@ public class ItemDAO {
 			instance = new ItemDAO();
 		}
 		return instance;
+	}
+	public boolean CheckItem(String name) {
+		for(int i = 0 ; i < item.size(); i++) {
+			if(name.equals(item.get(i).getItemName()))
+				return true;
+		}
+		return false;
 	}
 	private void UpdateCategory() {
 		category = item.stream().map(Item::getCategoryName).distinct().toList();
@@ -71,6 +81,14 @@ public class ItemDAO {
 		}
 		return false;
 	}
+	
+	
+	public void NewItem(String name, String category, int price) {
+		item.add(new Item(category, name, price));
+		UpdateCategory();
+	}
+	
+	
 	public int getItemNo(String itemname) {
 		for(Item i : item) {
 			if(i.getItemName().equals(itemname)) {
@@ -113,5 +131,59 @@ public class ItemDAO {
 		}
 		System.out.println("======================");
 		System.out.println("총 %3d개 (%10d원)".formatted(count,sum));
+	}
+	public void PrintAdminCartData(String data) {
+		if(data == null || data.length()< 1) return;
+		String[] t = data.split("\n");
+		System.out.println("========판매된 아이템 목록==========");
+		int count = 0;
+		int sum = 0;
+		for(int i = 0 ; i < t.length; i++) {
+			String item2[] = t[i].split("/");
+			for(int i2 = 0 ; i2 < item.size(); i2++) {
+				if(Integer.parseInt(item2[0]) == item.get(i2).getItemNum()) {
+				System.out.println("[%3d] [%5s] [%6s] [%12d원] %d개"
+						.formatted(item.get(i2).getItemNum(),item.get(i2).getCategoryName(),
+								item.get(i2).getItemName(),item.get(i2).getPrice(),t[1]));	
+					count += Integer.parseInt(item2[1]);
+					sum += Integer.parseInt(item2[1]) * item.get(i2).getPrice();
+					break;
+				}
+			}
+		}
+		System.out.println("======================");
+		System.out.println("총 %3d개 (%10d원)".formatted(count,sum));
+	}
+	public String SaveData() {
+		String data ="";
+		for(int i = 0 ; i < item.size(); i++) {
+			data += item.get(i).Save();
+		}
+		if(data.length() > 1)
+			data = data.substring(0,data.length()-1);
+		return data;
+	}
+	public void PrintAdminItem() {
+		List<Item> copy = item;
+		copy.sort(Comparator.comparing(Item::getCategoryName).reversed().thenComparing(Item::getItemName));
+		
+		copy.forEach(Item::Info);
+	}
+	public void DeleteItem(int No) {
+		for(int i = 0 ; i <item.size(); i++ ) {
+			if( No == item.get(i).getItemNum()) {
+				if(item.size() == 1) {
+					item.clear();
+					break;
+				}
+				item.remove(i);
+			}
+		}
+	}
+	public int GetLastItemNum() {
+		return item.size();
+	}
+	public void PrintCartItem(String data) {
+		
 	}
 }

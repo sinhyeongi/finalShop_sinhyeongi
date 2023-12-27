@@ -112,14 +112,10 @@ public class FileDAO {
 		BoardDAO board = BoardDAO.getInstance();
 		board.LoadData(ReadFile(FileName.BOARD));
 	}
-	public static void SaveAllFiles() {
-//		MemberDAO member= MemberDAO.getInstance();
-//		SaveFile(ReadFile(FileName.MEMBER),member.);
-//		ItemDAO item = ItemDAO.getInstance();
-//		SaveFile(ReadFile(FileName.ITEM));
-//		CartDAO cart = CartDAO.getInstance();
-//		SaveFile(ReadFile(FileName.CART ));
-//		BoardDAO board = BoardDAO.getInstance();
-//		SaveFile(ReadFile(FileName.BOARD));
+	public void SaveAllFiles(String member, String item, String cart,String Board) {
+		SaveFile(FileName.MEMBER,member);
+		SaveFile(FileName.ITEM,item);
+		SaveFile(FileName.CART,cart);
+		SaveFile(FileName.BOARD,Board);
 	}
 }
