@@ -6,8 +6,8 @@ import dao.BoardDAO;
 import util.Util;
 
 public class AdminBoard  implements MenuCommand {
-	MallController cont;
-	BoardDAO board;
+	private MallController cont;
+	private BoardDAO board;
 	@Override
 	public void init() {
 		cont = MallController.getInstance();

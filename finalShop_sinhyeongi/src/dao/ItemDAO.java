@@ -1,13 +1,10 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import dto.Item;
-import dto.Member;
 
 public class ItemDAO {
 	private static ItemDAO instance;
@@ -24,6 +21,11 @@ public class ItemDAO {
 		}
 		return instance;
 	}
+	/**
+	 * 아이템 이름을 받아서 해당 아이템의 존재를 boolean 으로 리턴
+	 * @param name -> 아이템 이름
+	 * @return 해당 아이템 이름이 존재 하면 true
+	 */
 	public boolean CheckItem(String name) {
 		for(int i = 0 ; i < item.size(); i++) {
 			if(name.equals(item.get(i).getItemName()))
@@ -31,6 +33,9 @@ public class ItemDAO {
 		}
 		return false;
 	}
+	/**
+	 * 아이템 추가 및 삭제시 카테고리 업데이트
+	 */
 	private void UpdateCategory() {
 		category = item.stream().map(Item::getCategoryName).distinct().toList();
 	}
@@ -82,13 +87,22 @@ public class ItemDAO {
 		return false;
 	}
 	
-	
+	/**
+	 * 아이템 추가
+	 * @param name -> 아이템 이름
+	 * @param category -> 아이템 카테고리
+	 * @param price -> 가격
+	 */
 	public void NewItem(String name, String category, int price) {
 		item.add(new Item(category, name, price));
 		UpdateCategory();
 	}
 	
-	
+	/**
+	 * 아이템 이름에 해당 하는 아이템 번호 리턴
+	 * @param itemname -> 아이템 이름
+	 * @return 아이템넘버 리턴 / 존재 하지 않는 다면 -1
+	 */
 	public int getItemNo(String itemname) {
 		for(Item i : item) {
 			if(i.getItemName().equals(itemname)) {
@@ -111,6 +125,11 @@ public class ItemDAO {
 		}
 		UpdateCategory();
 	}
+	/**
+	 * 유저 구매내역 출력
+	 * cartdao 에서 유저가 구입한 아이템넘버 / 아이템 갯수 를 String 타입으로 받는다 
+	 * @param data -> n/n\n .... n/n으로 해당하는 스트링 데이터
+	 */
 	public void PrintCartData(String data) {
 		if(data == null || data.length()< 1) return;
 		String[] t = data.split("\n");
@@ -132,6 +151,11 @@ public class ItemDAO {
 		System.out.println("======================");
 		System.out.println("총 %3d개 (%10d원)".formatted(count,sum));
 	}
+	/**
+	 * 관리자에서 판매된 아이템 목록 과 갯수, 합산 금액 출력
+	 * cartdao 에서 내림차순으로 된 (아이템넘버 / 아이템 갯수) data를 받아서출력 
+	 * @param data -> n/n\n .... n/n으로 해당하는 스트링 데이터
+	 */
 	public void PrintAdminCartData(String data) {
 		if(data == null || data.length()< 1) return;
 		String[] t = data.split("\n");
@@ -154,6 +178,10 @@ public class ItemDAO {
 		System.out.println("======================");
 		System.out.println("총 %3d개 (%10d원)".formatted(count,sum));
 	}
+	/**
+	 * 세이브 관련
+	 * @return data -> 전체 회원정보 리턴
+	 */
 	public String SaveData() {
 		String data ="";
 		for(int i = 0 ; i < item.size(); i++) {
@@ -163,12 +191,20 @@ public class ItemDAO {
 			data = data.substring(0,data.length()-1);
 		return data;
 	}
+	/**
+	 * 관리자 메뉴(아이템)
+	 * 아이템 출력시 카테고리와 아이템 이름으로 정렬 후 출력
+	 */
 	public void PrintAdminItem() {
 		List<Item> copy = new ArrayList<Item>(item);
 		copy.sort(Comparator.comparing(Item::getCategoryName).reversed().thenComparing(Item::getItemName));
 		
 		copy.forEach(Item::Info);
 	}
+	/**
+	 *  아이템 번호를 입력 받아 해당 아이템 삭제
+	 * @param No -> 아이템 번호
+	 */
 	public void DeleteItem(int No) {
 		for(int i = 0 ; i <item.size(); i++ ) {
 			if( No == item.get(i).getItemNum()) {
@@ -182,13 +218,18 @@ public class ItemDAO {
 		}
 		System.out.println("해당 아이템 번호의 아이템이 존재 하지 않습니다.");
 	}
+	/**
+	 * 
+	 * @return 마지막 아이템 번호 리턴
+	 */
 	public int GetLastItemNum() {
 		return item.get(item.size()-1).getItemNum();
 	}
+	/**
+	 * 
+	 * @return 첫번째 아이템 번호 리턴
+	 */
 	public int GetFistItemNum() {
 		return item.get(0).getItemNum();
-	}
-	public void PrintCartItem(String data) {
-		
 	}
 }

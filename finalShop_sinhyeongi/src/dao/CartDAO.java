@@ -20,7 +20,13 @@ public class CartDAO {
 			instance = new CartDAO();
 		return instance;
 	}
-
+	/**
+	 * 새로운 아이템 구매
+	 * 현재 카트에 유저가 구입한 아이템 이있다면 갯수만 증가
+	 * @param id 유저 아이디
+	 * @param itemNo 아이템 넘버
+	 * @param itemCount 아이템 갯수
+	 */
 	public void BuyItem(String id, int itemNo, int itemCount) {
 		if(itemNo == -1) {
 			return;
@@ -34,7 +40,11 @@ public class CartDAO {
 		cart.add(new Cart(id, itemNo, itemCount));
 
 	}
-	
+	/**
+	 * 	카트 정보 로드
+	 * @param data 카트 정보
+	 * 
+	 */
 	public void LoadData(String data) {
 		if (data == null || data.length() < 1)
 			return;
@@ -48,6 +58,10 @@ public class CartDAO {
 		}
 
 	}
+	/**
+	 * 
+	 * @return 세이브 데이터 리턴
+	 */
 	public String SaveData() {
 		String data="";
 		for(int i = 0 ; i < cart.size(); i++) {
@@ -57,6 +71,11 @@ public class CartDAO {
 			data = data.substring(0,data.length()-1);
 		return data;
 	}
+	/**
+	 * 유저가 구매한 아이템 String type 리턴 
+	 * @param id 유저 아이디
+	 * @return 아이템 넘버/ 아이템 갯수\n...아이템 넘버/ 아이템 갯수\n
+	 */
 	public String PrintCart(String id) {
 		String data ="";
 		for(int i = 0 ; i < cart.size(); i++) {
@@ -68,6 +87,10 @@ public class CartDAO {
 			data = data.substring(0,data.length() -1);
 		return data;
 	}
+	/**
+	 * 구매 아이템 전체 중 아이템 넘버/ 아이템 갯수\n .... String type 리턴
+	 * @return 아이템 넘버/ 아이템 갯수\n...아이템 넘버/ 아이템 갯수\n 
+	 */
 	public String PrintCart() {
 		String data ="";
 		List<Cart> copy = cart;
@@ -79,6 +102,10 @@ public class CartDAO {
 			data = data.substring(0,data.length() -1);
 		return data;
 	}
+	/**
+	 * 유저가 구매한 아이템 전체 삭제
+	 * @param id 유저 아이디
+	 */
 	public void DeleteUser(String id) {
 		for(int i = 0 ; i < cart.size(); i++) {
 			if(cart.get(i).getId().equals(id)) {
@@ -89,6 +116,10 @@ public class CartDAO {
 			}
 		}
 	}
+	/**
+	 * 아이템 넘버에 해당 하는 아이템 삭제
+	 * @param No 아이템 넘버
+	 */
 	public void DeleteItem(int No) {
 		for(int i = 0 ; i < cart.size(); i++) {
 			if( No == cart.get(i).getItemNum()) {

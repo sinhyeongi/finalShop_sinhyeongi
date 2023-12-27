@@ -90,9 +90,17 @@ public class Board {
 		return boradNum + "/" + title + "/" + id + "/" + date + "/"
 				+ contents + "/" + hits;
 	}
+	/**
+	 * 상세보기
+	 * @return 게시글 상세 보기
+	 */
 	public String toBoard() {
 		return"( "+this.boradNum+") [ 제목 : "+this.title+"\t\t 작성자 : "+this.id +"날짜 : "+date+"\t\t 조회수 : "+hits+"]";
 	}
+	/**
+	 * 세이브 데이터 형식
+	 * @return
+	 */
 	public String Save() {
 		return "%d/%s/%s/%s/%s/%d\n".formatted(boradNum,title,contents,id,date,hits);
 	}
