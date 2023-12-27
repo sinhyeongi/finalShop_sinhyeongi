@@ -36,6 +36,7 @@ public class MallLogin implements MenuCommand  {
 			System.out.println("아이디 또는 패스워드를 확인 하세요");
 			System.out.println("===로그인 실패===");
 			cont.setNext("MallMain");
+			return false;
 		}
 		System.out.println("[ 로그인 성공 ]");
 		return false;
