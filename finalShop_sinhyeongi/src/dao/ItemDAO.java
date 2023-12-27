@@ -142,9 +142,9 @@ public class ItemDAO {
 			String item2[] = t[i].split("/");
 			for(int i2 = 0 ; i2 < item.size(); i2++) {
 				if(Integer.parseInt(item2[0]) == item.get(i2).getItemNum()) {
-				System.out.println("[%3d] [%5s] [%6s] [%12d원] %d개"
+				System.out.println("[%3d] [%5s] [%6s] [%12s원] %s개"
 						.formatted(item.get(i2).getItemNum(),item.get(i2).getCategoryName(),
-								item.get(i2).getItemName(),item.get(i2).getPrice(),t[1]));	
+								item.get(i2).getItemName(),item.get(i2).getPrice(),item2[1]));	
 					count += Integer.parseInt(item2[1]);
 					sum += Integer.parseInt(item2[1]) * item.get(i2).getPrice();
 					break;
@@ -164,7 +164,7 @@ public class ItemDAO {
 		return data;
 	}
 	public void PrintAdminItem() {
-		List<Item> copy = item;
+		List<Item> copy = new ArrayList<Item>(item);
 		copy.sort(Comparator.comparing(Item::getCategoryName).reversed().thenComparing(Item::getItemName));
 		
 		copy.forEach(Item::Info);
@@ -174,14 +174,19 @@ public class ItemDAO {
 			if( No == item.get(i).getItemNum()) {
 				if(item.size() == 1) {
 					item.clear();
-					break;
+					return;
 				}
 				item.remove(i);
+				return;
 			}
 		}
+		System.out.println("해당 아이템 번호의 아이템이 존재 하지 않습니다.");
 	}
 	public int GetLastItemNum() {
-		return item.size();
+		return item.get(item.size()-1).getItemNum();
+	}
+	public int GetFistItemNum() {
+		return item.get(0).getItemNum();
 	}
 	public void PrintCartItem(String data) {
 		

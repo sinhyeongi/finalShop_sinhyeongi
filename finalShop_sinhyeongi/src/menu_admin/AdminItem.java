@@ -41,8 +41,11 @@ public class AdminItem implements MenuCommand  {
 			this.item.NewItem(item, category, price);
 		}
 		else if( sel == 2) {
-			System.out.println(item.GetLastItemNum());
-			int No = Util.getValue("► 삭제할 아이템 번호 입력"+item.GetLastItemNum()+"]", 1, item.GetLastItemNum());
+			if(item.GetLastItemNum() == 0) {
+				System.out.println("아이템 이 없습니다!");
+				return false;
+			}
+			int No = Util.getValue("► 삭제할 아이템 번호 입력 [ "+item.GetFistItemNum()+" -"+item.GetLastItemNum()+"]", item.GetFistItemNum(), item.GetLastItemNum());
 			cont.DeleteItem(No);
 		}
 		else if( sel == 3) {

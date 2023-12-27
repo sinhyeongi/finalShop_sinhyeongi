@@ -27,9 +27,11 @@ public class MemberShopping  implements MenuCommand {
 			return false;
 		}
 		item.PrintCategory();
+		System.out.println("[0] 뒤로가기");
 		int sel = Util.getValue("메뉴 입력 [0 - "+(item.getCategorySize())+"]", 0, item.getCategorySize());
 		if(sel == 0) {
 			cont.setNext("MemberMain");
+			return false;
 		}
 		item.PrintCategoryItem(sel);
 		while(true) {
