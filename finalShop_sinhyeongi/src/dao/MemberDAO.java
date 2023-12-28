@@ -11,6 +11,7 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		list = new ArrayList<Member>();
+		list.add(new Member(1000, "admin", "admin","관리자"));
 	}
 	
 	/**
