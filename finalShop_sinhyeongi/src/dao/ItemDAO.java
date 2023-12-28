@@ -54,7 +54,9 @@ public class ItemDAO {
 	*/
 	public void PrintCategoryItem(int idx) {
 		if(item.size() == 0) return;
-		List<String> cat =item.stream().map(Item::getCategoryName).distinct().toList(); 
+		
+		List<String> cat =item.stream().map(Item::getCategoryName).distinct().toList();
+		if(cat.size() <= idx || idx < 0)return;
 		int count = 1;
 		for(int i = 0 ; i < item.size(); i++) {
 			if(cat.get(idx-1).equals(item.get(i).getCategoryName())) {

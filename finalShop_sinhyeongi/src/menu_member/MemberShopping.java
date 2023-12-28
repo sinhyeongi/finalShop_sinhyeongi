@@ -33,6 +33,9 @@ public class MemberShopping  implements MenuCommand {
 			cont.setNext("MemberMain");
 			return false;
 		}
+		if(sel < 1 || sel > item.getCategorySize()) {
+			return false;
+		}
 		item.PrintCategoryItem(sel);
 		while(true) {
 			String itemname = Util.getValue("► 구매 아이템 이름");
@@ -41,6 +44,9 @@ public class MemberShopping  implements MenuCommand {
 				continue;
 			}
 			int count = Util.getValue("► 아이템 구매 수량 [1 - 100]", 1, 100);
+			if(count < 0 || count > 100) {
+				return false;
+			}
 			cart.BuyItem(cont.getLoginId(), item.getItemNo(itemname), count);
 			System.out.println("[  %s %d개 구매 완료 ]".formatted(itemname,count));
 			cont.setNext("MemberCart");

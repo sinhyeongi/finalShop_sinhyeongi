@@ -49,6 +49,9 @@ public class MemberBoard  implements MenuCommand {
 					}
 				}else if( sel == 3) {
 					sel = Util.getValue("게시글 번호 입력 ["+(board.getStart() )+ " - "+board.getEnd()+"]", board.getStart(), board.getEnd());
+					if(sel <board.getStart() || sel > board.getEnd() ){
+						continue;
+					}
 					board.PrintBoard(sel);
 					break;
 				}
@@ -68,7 +71,10 @@ public class MemberBoard  implements MenuCommand {
 			board.PrintBoard(cont.getLoginId());
 			System.out.println("[1]삭제");
 			System.out.println("[0]돌아가기");
-			 sel = Util.getValue("► 메뉴 입력 [0 - 1] ", 0, 1);
+			 sel = Util.getValue("► 메뉴 입력 ["+board.getStart(cont.getLoginId())+" - "+board.getEnd(cont.getLoginId())+"] ", board.getStart(cont.getLoginId()), board.getEnd(cont.getLoginId()));
+			 if(sel < board.getStart(cont.getLoginId()) || sel > board.getEnd(cont.getLoginId())) {
+				 return false;
+			 }
 			 if(sel == 1) {
 				 sel = Util.getValue("► 삭제할 게시글 번호 입력  ["+board.getBoardStartdNum()+" - "+board.getBoardendNum() +"] ", board.getBoardStartdNum(), board.getBoardendNum() );
 				 if(board.DeleteUserBoard(cont.getLoginId(), sel)) {

@@ -67,6 +67,22 @@ public class BoardDAO {
 	public int getStart() {
 		return board.get(start).getBoradNum();
 	}
+	
+	/**
+	 * 
+	 * @param id 유저 아이디
+	 * @return 유저가 작성한 글 첫번째 번호
+	 */
+	public int getStart(String id) {
+		for(int i = 0 ; i < board.size(); i++) {
+			if(id.equals(board.get(i).getId())) {
+				return board.get(i).getBoradNum();
+			}
+		}
+		return -1;
+	}
+	
+	
 	/**
 	 * 
 	 * @return 현재 페이지 마지막 번호
@@ -76,6 +92,20 @@ public class BoardDAO {
 			return board.get(board.size()-1).getBoradNum();
 		}
 		return board.get(end).getBoradNum();
+	}
+	
+	/**
+	 * 
+	 * @param id 유저아이디
+	 * @return 게시판에서 유저가 작성한 마지막 글 번호
+	 */
+	public int getEnd(String id) {
+		for(int i = board.size() -1; i >= 0 ; i--) {
+			if(board.get(i).getId().equals(id)) {
+				return board.get(i).getBoradNum();
+			}
+		}
+		return -1;
 	}
 	/**
 	 * idx와 같은 게시판 번호 게시판 출력
