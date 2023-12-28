@@ -22,6 +22,7 @@ import menu_member.MemberInfo;
 import menu_member.MemberQuit;
 import menu_member.MemberShopping;
 import menu_member._MemberMain;
+import util.Util;
 
 public class MallController {
 	private static  MallController instance = new MallController();
@@ -65,6 +66,7 @@ public class MallController {
 		this.loginId = loginId;
 	}
 	public void DeleteUser() {
+		
 		System.out.println(member.getMemberName(loginId)+"탈퇴 완료");
 		member.DeleteUser(loginId);
 		cart.DeleteUser(loginId);
