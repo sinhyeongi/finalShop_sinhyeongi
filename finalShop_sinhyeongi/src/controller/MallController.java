@@ -66,9 +66,9 @@ public class MallController {
 		this.loginId = loginId;
 	}
 	public void DeleteUser() {
-		System.out.println(member.getMemberName(loginId)+"탈퇴 완료");
 		member.DeleteUser(loginId);
 		cart.DeleteUser(loginId);
+		System.out.println("탈퇴 완료");
 		loginId = null;
 		this.next = "MallMain";
 	}

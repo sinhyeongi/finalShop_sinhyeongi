@@ -71,7 +71,7 @@ public class MemberBoard  implements MenuCommand {
 			board.PrintBoard(cont.getLoginId());
 			System.out.println("[1]삭제");
 			System.out.println("[0]돌아가기");
-			 sel = Util.getValue("► 메뉴 입력 ["+board.getStart(cont.getLoginId())+" - "+board.getEnd(cont.getLoginId())+"] ", board.getStart(cont.getLoginId()), board.getEnd(cont.getLoginId()));
+			 sel = Util.getValue("► 메뉴 입력 [ 0 - "+board.getEnd(cont.getLoginId())+"] ", 0, board.getEnd(cont.getLoginId()));
 			 if(sel < board.getStart(cont.getLoginId()) || sel > board.getEnd(cont.getLoginId())) {
 				 return false;
 			 }

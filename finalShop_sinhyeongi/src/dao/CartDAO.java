@@ -111,10 +111,12 @@ public class CartDAO {
 			if(cart.get(i).getId().equals(id)) {
 				if(cart.size() == 1) {
 					cart.clear();
+					break;
 				}
 				cart.remove(i);
 			}
 		}
+		System.out.println("회원 구매 내역 삭제 완료");
 	}
 	/**
 	 * 아이템 넘버에 해당 하는 아이템 삭제

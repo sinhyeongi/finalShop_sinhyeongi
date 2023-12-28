@@ -40,10 +40,10 @@ public class _MemberMain  implements MenuCommand {
 		}
 		else if(sel == 5) {
 			System.out.println("회원 탈퇴시 구매 내역이 사라집니다");
-			sel = Util.getValue("정말 탈퇴 하시겠습니까?", 0, 2);
 			System.out.println("[1] 예");
 			System.out.println("[2] 아니오");
 			System.out.println("[0] 종료");
+			sel = Util.getValue("정말 탈퇴 하시겠습니까?", 0, 2);
 			if(sel == 0) {
 				cont.setNext(null);
 			}
