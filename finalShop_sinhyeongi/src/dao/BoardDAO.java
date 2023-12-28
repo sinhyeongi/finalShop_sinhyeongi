@@ -236,19 +236,4 @@ public class BoardDAO {
 		return data;
 	}
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public void DeleteUser(String id) {
-		for (int i = 0; i < board.size(); i++) {
-			if (board.get(i).getId().equals(id)) {
-				if (board.size() == 1) {
-					board.clear();
-					break;
-				}
-				board.remove(i);
-			}
-		}
-	}
 }

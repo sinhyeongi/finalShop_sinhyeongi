@@ -66,11 +66,9 @@ public class MallController {
 		this.loginId = loginId;
 	}
 	public void DeleteUser() {
-		
 		System.out.println(member.getMemberName(loginId)+"탈퇴 완료");
 		member.DeleteUser(loginId);
 		cart.DeleteUser(loginId);
-		board.DeleteUser(loginId);
 		loginId = null;
 		this.next = "MallMain";
 	}
@@ -78,7 +76,6 @@ public class MallController {
 		System.out.println(member.getMemberName(id)+"탈퇴 완료");
 		member.DeleteUser(id);
 		cart.DeleteUser(id);
-		board.DeleteUser(id);
 	}
 	public void Save() {
 		file.SaveAllFiles(member.SaveData(),item.SaveData(),cart.SaveData(),board.SaveData());
