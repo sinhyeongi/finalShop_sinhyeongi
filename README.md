@@ -28,10 +28,9 @@
 	admin 관리자는 삭제 불가능
 
 >2. 상품관리 : AdminItem
-
-	[1] 아이템 추가	ItemDAO.NewItem(아이템이름,카테고리,가격)
    <pre>
      <code>
+	[1] 아이템 추가	ItemDAO.NewItem(아이템이름,카테고리,가격)
        아이템 이름 중복 확인
        [2] 아이템 삭제 : Controller.DeleteItem(아이템넘버)
         현재 아이템 이 없다면 "아이템이 없습니다! " 출력
